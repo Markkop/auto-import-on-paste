@@ -65,7 +65,8 @@ async function handlePastedCode(document: vscode.TextDocument, change: vscode.Te
 		const func = functionCalls[0];
 		if (!isAlreadyImported(document, func)) {
 			console.log(`Attempting to import function: ${func}`);
-			await triggerSuggestionForFunction(document, func, change.range.start);
+			const endPosition = change.range.start.translate(change.text.split('\n').length - 1, change.text.split('\n').pop()!.length);
+			await triggerSuggestionForFunction(document, func, change.range.start, endPosition);
 		} else {
 			console.log(`Function ${func} is already imported`);
 		}
@@ -74,6 +75,7 @@ async function handlePastedCode(document: vscode.TextDocument, change: vscode.Te
 		vscode.window.showErrorMessage(`Error handling pasted code: ${(error as any).message}`);
 	}
 }
+
 
 function extractFunctionCalls(text: string): string[] {
 	const functionCallRegex = /\b(?!if|for|while|switch)(\w+)\s*\(/g;
@@ -100,7 +102,7 @@ function isAlreadyImported(document: vscode.TextDocument, functionName: string):
 	return result;
 }
 
-async function triggerSuggestionForFunction(document: vscode.TextDocument, functionName: string, startPosition: vscode.Position) {
+async function triggerSuggestionForFunction(document: vscode.TextDocument, functionName: string, startPosition: vscode.Position, endPosition: vscode.Position) {
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
 		console.log('No active text editor');
@@ -151,10 +153,12 @@ async function triggerSuggestionForFunction(document: vscode.TextDocument, funct
 			vscode.window.showErrorMessage(`Failed to import function: ${functionName}`);
 		}
 
-		const endPosition = editor.selection.end;
-		editor.selection = new vscode.Selection(endPosition, endPosition);
+		// Move cursor to the end of the pasted code
+		const finalPosition = new vscode.Position(endPosition.line + 1, endPosition.character);
+		editor.selection = new vscode.Selection(finalPosition, finalPosition);
 	});
 }
+
 
 function updateStatusBar() {
 	if (isEnabled) {
