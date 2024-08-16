@@ -72,7 +72,7 @@ async function handlePastedCode(document: vscode.TextDocument, change: vscode.Te
 		}
 	} catch (error) {
 		console.error('Error handling pasted code:', (error as any).message);
-		vscode.window.showErrorMessage(`Error handling pasted code: ${(error as any).message}`);
+		vscode.window.showWarningMessage(`Error handling pasted code: ${(error as any).message}`);
 	}
 }
 
@@ -150,7 +150,7 @@ async function triggerSuggestionForFunction(document: vscode.TextDocument, funct
 
 		if (!success) {
 			console.log(`Failed to import function: ${functionName} after multiple attempts`);
-			vscode.window.showErrorMessage(`Failed to import function: ${functionName}`);
+			vscode.window.showWarningMessage(`Auto Import failed. VSCode suggestion not found in time. `);
 		}
 
 		// Move cursor to the end of the pasted code
