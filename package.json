@@ -7,7 +7,7 @@
     "url": "https://github.com/Markkop/auto-import-on-paste"
   },
   "description": "Auto import functions from VSCode suggestions when pasting code",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.92.0"
   },

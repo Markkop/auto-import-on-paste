@@ -150,7 +150,6 @@ async function triggerSuggestionForFunction(document: vscode.TextDocument, funct
 
 		if (!success) {
 			console.log(`Failed to import function: ${functionName} after multiple attempts`);
-			vscode.window.showWarningMessage(`Auto Import failed. VSCode suggestion not found in time. `);
 		}
 
 		// Move cursor to the end of the pasted code
