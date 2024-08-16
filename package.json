@@ -2,8 +2,12 @@
   "name": "auto-import-on-paste",
   "publisher": "mark-kop",
   "displayName": "auto-import-on-paste",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Markkop/auto-import-on-paste"
+  },
   "description": "Auto import functions from VSCode suggestions when pasting code",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -17,6 +21,7 @@
   "contributes": {
     "commands": []
   },
+  "license": "MIT",
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
