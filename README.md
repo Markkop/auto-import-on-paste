@@ -21,12 +21,10 @@ https://marketplace.visualstudio.com/items?itemName=mark-kop.auto-import-on-past
 
 No specific requirements or dependencies are needed to use this extension.
 
-## Extension
+## Usage
 
-It detects the function, goes to the end of the function name, calls VSCode suggestions, and applies the first one.  
-It will be triggered by any code change, not only pasted code.
+It detects the function, checks if it is already imported, goes to the end of the function name, calls VSCode suggestions, and applies the first one.  
+It will be triggered by any code change, not only pasted code.  
+It is limited to only do that if only one function is detected. We can make it cover multiple functions, but it might take more time and be inconvenient. 
 
-This extension contributes the following settings:
 
-- `autoImportOnPaste.enable`: Enable/disable the auto-import functionality. Toggle this from the status bar as well.
-- `autoImportOnPaste.supportedLanguages`: List of languages that the extension supports. Defaults to JavaScript and TypeScript.
